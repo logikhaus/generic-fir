@@ -63,9 +63,9 @@ architecture rtl of tb_fir is
 --	attribute mult_style:string; attribute mult_style of fir: entity is "block";		--xilinx:
 
 begin
-	/* synthesis translate_off*/
+	/* synthesis translate_off */
 	clk		<= not clk after 10 ns;
-	/* synthesis translate_on*/
+	/* synthesis translate_on */
 	
 	process(pwrUpCnt, nRst) is begin
 		if pwrUpCnt < 10 or nRst = '0' then

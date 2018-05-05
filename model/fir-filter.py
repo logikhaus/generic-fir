@@ -56,19 +56,19 @@ wc  = 2*pi*(wp+wm/2)/ws;    #    (wp+ws)/2;
 
 
 # Specify the ideal impulse response (filter coefficients) for cutoff frequency at w_c = 20kHz:
-j=complex(0,1);
-n01=r_[0:M-1:j*M];
+j   = complex(0,1);
+n01 = r_[0: M-1: j*M];
 
 print(n01);
 
 # Infinite-duration impulse response. This impulse response will later be truncated using
 # a discrete-time window function (here we use the Hamming window).
-h_n=sin(n01*wc)/(n01*pi);
+h_n = sin(n01 * wc) / (n01 * pi);
 
 print(h_n);
 
 # Hamming window
-w_n=0.54-0.46*cos(2*pi*n01/N);
+w_n = 0.54 - 0.46 * cos(2 * pi * n01 / N);
 # Hann window
 #w_n=0.5*(1+cos(2*pi*n/(M)));
 
@@ -78,7 +78,7 @@ print(w_n);
 ## FIR filter design using the window method.
 #    Usage:
 #    scipy.signal.firwin(numtaps,cutoff,width=None,window='hamming',pass_zero=True,scale=True,nyq=1.0)
-b_n01=signal.firwin(M,wc,width=None,window='hamming',pass_zero=True,scale=True,nyq=10*wc);
+b_n01   = signal.firwin(M, wc, width=None, window='hamming', pass_zero=True, scale=True, nyq=10*wc);
 
 # Impulse response data in time domain.
 #
@@ -88,7 +88,8 @@ b_n01=signal.firwin(M,wc,width=None,window='hamming',pass_zero=True,scale=True,n
 # to produce the results below. This is for fixed-point conversion.
 #
 # Digital simulation and hardware measurements yield exactly the same results (in Volts):
-b_n02=[-0.0017,
+b_n02   = [
+    -0.0017,
     -0.0019,
     -0.0024,
     -0.0026,
@@ -120,13 +121,13 @@ b_n02=[-0.0017,
     -0.0019,
     -0.0017];
 
-n=r_[0:len(b_n02)-1:j*len(b_n02)];
+n   = r_[0: len(b_n02)-1: j*len(b_n02)];
 
 
 
 # Calculate the z-domain frequency responses:
-w_n01,h_n01 = signal.freqz(b_n01,1);
-w_n02,h_n02 = signal.freqz(b_n02,1);
+w_n01, h_n01    = signal.freqz(b_n01, 1);
+w_n02, h_n02    = signal.freqz(b_n02, 1);
 
 
 
@@ -146,14 +147,14 @@ plt0.title("Theoretical response curves to a unit impulse excitation:");
 # The time-domain impulse response is used to specify the FIR filter coefficients.
 #
 graph0.add_subplot(2,1,1);    # #rows, #columns, plot#
-plt0.plot(n01,b_n01);
+plt0.plot(n01, b_n01);
 
 #
 # Frequency response of the impulse excitation, or I'd just say,
 # frequency-domain (z-domain) impulse response.
 #
 graph0.add_subplot(2,1,2);
-plt0.plot(w_n01,20*log10(abs(h_n01)));
+plt0.plot(w_n01, 20 * log10(abs(h_n01)));
 
 # TODO: Frequency response plot based on wc calculation:
 
@@ -171,14 +172,14 @@ plt1.title("Measured vs. theoretical response curves");
 #
 # Impulse response in time domain.
 graph1.add_subplot(2,1,1);
-simulated_t=plt1.plot(n01,b_n01,'r');
-measured_t=plt1.plot(n,b_n02,'b');
+simulated_t=plt1.plot(n01, b_n01, 'r');
+measured_t=plt1.plot(n, b_n02, 'b');
 
 # Impulse response in frequency domain (z domain).
 graph1.add_subplot(2,1,2);
 
-simulated_w=plt1.plot(w_n01,20*log10(abs(h_n01)),'r');
-measured_w=plt1.plot(w_n02,20*log10(abs(h_n02)),'b');
+simulated_w=plt1.plot(w_n01, 20 * log10(abs(h_n01)), 'r');
+measured_w=plt1.plot(w_n02, 20 * log10(abs(h_n02)), 'b');
 
 plt1.savefig('plt1.png');
 plt1.show();

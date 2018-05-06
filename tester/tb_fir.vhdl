@@ -140,6 +140,7 @@ begin
 	dbgSignals(u'length*2-1  downto u'length)<=std_ulogic_vector(y);				-- y:32bits						
 	dbgSignals(8+u'length*2 downto u'length*2)<=std_ulogic_vector(count);		--9bits (300<512)
 	
+	/* TODO FIXME Enable these lines for synthesis, disable for simulation. */
 	/* simulation translate_off */
 	debugger: entity work.stp(rtl) port map(
 		acq_clk			=> clk,

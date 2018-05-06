@@ -8,9 +8,10 @@ use IEEE.numeric_std.all;
 
 entity stp is
 	port (
-		acq_clk        : in std_logic                      := '0';             -- acq_clk.clk
-		acq_data_in    : in std_logic_vector(127 downto 0) := (others => '0'); --     tap.acq_data_in
-		acq_trigger_in : in std_logic_vector(0 downto 0)   := (others => '0')  --        .acq_trigger_in
+		acq_clk        : in std_logic                      := '0';             --    acq_clk.clk
+		acq_data_in    : in std_logic_vector(127 downto 0) := (others => '0'); --        tap.acq_data_in
+		acq_trigger_in : in std_logic_vector(0 downto 0)   := (others => '0'); --           .acq_trigger_in
+		trigger_in     : in std_logic                      := '0'              -- trigger_in.trigger_in
 	);
 end entity stp;
 
@@ -37,6 +38,7 @@ architecture rtl of stp is
 		port (
 			acq_data_in    : in std_logic_vector(127 downto 0) := (others => 'X'); -- acq_data_in
 			acq_trigger_in : in std_logic_vector(0 downto 0)   := (others => 'X'); -- acq_trigger_in
+			trigger_in     : in std_logic                      := 'X';             -- trigger_in
 			acq_clk        : in std_logic                      := 'X'              -- clk
 		);
 	end component sld_signaltap;
@@ -51,7 +53,7 @@ begin
 			sld_storage_qualifier_mode  => "OFF",
 			sld_trigger_bits            => 1,
 			sld_trigger_level           => 1,
-			sld_trigger_in_enabled      => 0,
+			sld_trigger_in_enabled      => 1,
 			sld_enable_advanced_trigger => 0,
 			sld_trigger_level_pipeline  => 1,
 			sld_trigger_pipeline        => 0,
@@ -59,13 +61,14 @@ begin
 			sld_counter_pipeline        => 0,
 			sld_node_info               => 806383104,
 			sld_node_crc_bits           => 32,
-			sld_node_crc_hiword         => 24613,
-			sld_node_crc_loword         => 48613
+			sld_node_crc_hiword         => 65237,
+			sld_node_crc_loword         => 58824
 		)
 		port map (
-			acq_data_in    => acq_data_in,    --     tap.acq_data_in
-			acq_trigger_in => acq_trigger_in, --        .acq_trigger_in
-			acq_clk        => acq_clk         -- acq_clk.clk
+			acq_data_in    => acq_data_in,    --        tap.acq_data_in
+			acq_trigger_in => acq_trigger_in, --           .acq_trigger_in
+			trigger_in     => trigger_in,     -- trigger_in.trigger_in
+			acq_clk        => acq_clk         --    acq_clk.clk
 		);
 
 end architecture rtl; -- of stp

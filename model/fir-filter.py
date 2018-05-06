@@ -77,7 +77,7 @@ print(w_n);
 # Impulse response of ideal filter in time domain:
 ## FIR filter design using the window method.
 #    Usage:
-#    scipy.signal.firwin(numtaps,cutoff,width=None,window='hamming',pass_zero=True,scale=True,nyq=1.0)
+#    scipy.signal.firwin(numtaps, cutoff, width=None, window='hamming', pass_zero=True, scale=True, nyq=1.0)
 b_n01   = signal.firwin(M, wc, width=None, window='hamming', pass_zero=True, scale=True, nyq=10*wc);
 
 # Impulse response data in time domain.

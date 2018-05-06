@@ -41,9 +41,6 @@ library ieee;	use ieee.std_logic_1164.all, ieee.numeric_std.all;
 entity fir is generic(
 	order:	positive	:= 30
 ); port(
-	/* Asserting reset will start protocol sequence transmission. To restart the re-transmission of the sequence, 
-		re-assert this reset signal, and the whole SPI sequence will be re-transmitted again.
-	*/
 	reset:	in	std_ulogic;			
 	clk:	in	std_ulogic;
 	
@@ -53,9 +50,6 @@ entity fir is generic(
 ); end entity fir;
 
 architecture rtl of fir is
-	/* Memory I/Os: */
-	signal q:	u_signed(u'range);
-	
 	/* 32-by-N matrix array structure (as in RAM). Similar to integer_vector, difference being base vector is 32-bit unsigned. */
 	type	signed_vector	is array(natural range <>) of	u_signed(u'range);
 	type	signedx2_vector	is array(natural range <>) of	u_signed(u'length*2-1 downto 0);

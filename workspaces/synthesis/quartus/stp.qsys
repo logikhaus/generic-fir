@@ -53,6 +53,13 @@
   <port name="acq_data_in" internal="acq_data_in" />
   <port name="acq_trigger_in" internal="acq_trigger_in" />
  </interface>
+ <interface
+   name="trigger_in"
+   internal="signaltap_ii_logic_analyzer_0.trigger_in"
+   type="conduit"
+   dir="end">
+  <port name="trigger_in" internal="trigger_in" />
+ </interface>
  <module
    name="signaltap_ii_logic_analyzer_0"
    kind="altera_signaltap_ii_logic_analyzer"
@@ -75,7 +82,7 @@
   <parameter name="sld_sample_depth" value="128" />
   <parameter name="sld_storage_qualifier_gap_record" value="0" />
   <parameter name="sld_trigger_bits" value="1" />
-  <parameter name="sld_trigger_in_enabled" value="0" />
+  <parameter name="sld_trigger_in_enabled" value="1" />
   <parameter name="sld_trigger_level" value="1" />
   <parameter name="sld_trigger_level_pipeline" value="1" />
   <parameter name="sld_trigger_pipeline" value="0" />
